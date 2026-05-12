@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="page-title">Prediction Result</h1>
+
+<div class="card">
+
+<h2>Status:
+{% if result == 'Fraud' %}
+<span style="color:red;">Fraudulent Transaction</span>
+{% else %}
+<span style="color:green;">Safe Transaction</span>
+{% endif %}
+</h2>
+
+<h3>Confidence Score: {{ confidence }}%</h3>
+
+<a href="/predict">
+<button>Check Another</button>
+</a>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 class="page-title">Fraud Analytics Dashboard</h1>
+
+<div class="cards">
+
+<div class="card">
+    <h3>Total</h3>
+    <p>{{ total }}</p>
+</div>
+
+<div class="card danger">
+    <h3>Fraud</h3>
+    <p>{{ fraud }}</p>
+</div>
+
+<div class="card success">
+    <h3>Safe</h3>
+    <p>{{ safe }}</p>
+</div>
+
+</div>
+
+<div class="card" style="margin-top:30px;">
+    <canvas id="fraudChart"></canvas>
+</div>
+
+<h2 style="margin-top:35px;">Recent Transactions</h2>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>Status</th>
+    </tr>
+    {% for row in recent %}
+    <tr>
+        <td>{{ row.id }}</td>
+        <td>{{ row.type }}</td>
+        <td>{{ row.amount }}</td>
+        <td>{{ row.prediction }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const ctx = document.getElementById('fraudChart');
+
+const fraud = Number('{{ fraud }}') || 0;
+const safe = Number('{{ safe }}') || 0;
+
+new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Fraud', 'Safe'],
+        datasets: [{
+            data: [fraud, safe],
+            backgroundColor: ['red', 'green']
+        }]
+    }
+});
+</script>
+
+<div class="card" style="margin-top:25px;">
+<h2>AI Insights</h2>
+    <ul>
+    <li>Highest fraud risk occurs in TRANSFER transactions.</li>
+    <li>Transactions above ₹50,000 show abnormal patterns.</li>
+    <li>Night-time payments have 18% higher risk.</li>
+    <li>Cash-out activity needs monitoring.</li>
+    </ul>
+</div>
+
+{% endblock %}

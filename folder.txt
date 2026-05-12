@@ -1,0 +1,20 @@
+fraud_detection/
+│── app.py
+│── config.py
+│── requirements.txt
+│── model/
+│   └── fraud_model.pkl
+│── static/
+│   ├── css/
+│   ├── js/
+│   └── images/
+│── templates/
+│   ├── login.html
+│   ├── dashboard.html
+│   ├── predict.html
+│   ├── history.html
+│── ml/
+│   ├── train_model.py
+│   └── preprocess.py
+│── database/
+│   └── schema.sql

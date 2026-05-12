@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="page-title">Transactions</h1>
+
+<form method="GET">
+
+<input
+type="text"
+name="search"
+placeholder="Search..."
+value="{{ search }}"
+>
+
+<button type="submit">Search</button>
+
+</form>
+
+<table style="margin-top:20px;">
+
+<tr>
+<th>ID</th>
+<th>Type</th>
+<th>Amount</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+{% for row in rows %}
+<tr>
+<td>{{ row.id }}</td>
+<td>{{ row.type }}</td>
+<td>{{ row.amount }}</td>
+<td>{{ row.prediction }}</td>
+
+<td>
+<a href="/delete/{{ row.id }}">
+<button>Delete</button>
+</a>
+</td>
+
+</tr>
+{% endfor %}
+
+</table>
+
+<div style="margin-top:20px;">
+<a href="/history?page={{ page-1 if page>1 else 1 }}&search={{ search }}">
+<button>Prev</button>
+</a>
+
+<a href="/history?page={{ page+1 }}&search={{ search }}">
+<button>Next</button>
+</a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="upload-container">
+    <h1 class="page-title">Bulk CSV Prediction</h1>
+    <p class="page-subtitle">Upload a CSV file with transaction data to analyze multiple records at once.</p>
+
+    <form method="POST" enctype="multipart/form-data" class="upload-form">
+        <div class="file-input-group">
+            <input type="file" name="file" id="file" required>
+            <label for="file">Choose a CSV file</label>
+        </div>
+        <button type="submit" class="btn-primary">Upload and Analyze</button>
+    </form>
+
+    {% if error %}
+    <div class="error-message">
+        <p>{{ error }}</p>
+    </div>
+    {% endif %}
+    
+    <div class="upload-info">
+        <h3>Required CSV Format</h3>
+        <p>Your CSV should contain the following columns:</p>
+        <code>step, type, amount, oldbalanceOrg, newbalanceOrig, oldbalanceDest, newbalanceDest</code>
+    </div>
+</div>
+
+{% endblock %}
